@@ -4,9 +4,10 @@
 #-v1.1 ---------------------------------------------------------------------------------------------------------------------
 #   -Encoder auto-map now auto switches with selected track
 #-v1.2 ---------------------------------------------------------------------------------------------------------------------
-#   -Bank B and C are working finally! Mapped to tracks 9-16 and 17-24, as would have been expected stock.
+#   -Bank B and C are working now. Mapped to tracks 9-16 and 17-24, as would have been expected stock.
 #-TODO ---------------------------------------------------------------------------------------------------------------------
 #   -I ... think that's it! Phew!
+#   -Wait no: Set up my Preset so it can be dumped directly to the mpk from Ableton (Sysex?)
 
 from __future__ import with_statement
 import Live
