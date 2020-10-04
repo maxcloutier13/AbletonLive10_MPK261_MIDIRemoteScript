@@ -24,7 +24,7 @@ Clicking on a device you should now see the blue hand and it should automap if y
 Enjoy the super smooth movement of the relative knobs!<br/>
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-2020-10-04 10:43 AM <br/>
+v1.0 - 2020-10-04 10:43 AM <br/>
 Limitations:<br/>
 This is my first time messing with midi remote script so bear with me<br/>
 Only Bank A of the sliders/arm works right now.<br/>
