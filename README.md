@@ -35,10 +35,10 @@ TODO:<br/>
 ~~Switch device (blue hand) automatically when selecting another channel<br/>~~
 Set up my Preset so it can be dumped directly to the mpk from Ableton (Sysex?)<br/>
 
-v1.1 fixed the autoswitch device when selecting another channel
+v1.1 fixed the autoswitch device when selecting another channel  
 
-v1.2 - 2020-10-04 6:27 PM
-Bank B and C entirely functionnal with the arm buttons and sliders activating channels 9-15 and 16-24 as would be expected
+v1.2 - 2020-10-04 6:27 PM  
+Bank B and C entirely functionnal with the arm buttons and sliders activating channels 9-15 and 16-24 as would be expected  
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- KUDOS --<br/>
