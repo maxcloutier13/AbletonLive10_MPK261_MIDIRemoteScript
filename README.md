@@ -1,6 +1,6 @@
 # MPK261-MIDI-Remote-Script
 Custom midi remote script for using the MPK261 in Ableton Live 10.x <br/>
-Custom script to fix some issues with the default one that comes with Ableton.
+Fixes some issues with the default one that comes with Ableton.
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 I was trying to resolve 2 problems: <br/>
