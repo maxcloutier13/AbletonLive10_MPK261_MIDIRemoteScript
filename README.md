@@ -32,7 +32,7 @@ Sometimes it doesn't get the blue hand on the first device you open, selecting a
 
 TODO:<br/>
 Fix bank B+C so it controls tracks 9-16 and 16-24 fluidly<br/>
-Set up my Preset so it can be dumped directly to the mpk from Ableton.<br/>
+Set up my Preset so it can be dumped directly to the mpk from Ableton (Sysex?)<br/>
 Switch device (blue hand) automatically when selecting another channel<br/>
 Implement red box functionality<br/>
 
