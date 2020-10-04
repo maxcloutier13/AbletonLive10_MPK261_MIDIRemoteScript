@@ -3,9 +3,12 @@ Custom midi remote script for using the MPK261 in Ableton Live 10.x <br/>
 Fixes some issues with the default one that comes with Ableton.
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-I was trying to resolve 2 problems: <br/>
+I was trying to resolve 3 problems mainly: <br/>
 1: Actually using the encoder knobs in RELATIVE mode as they were intended. Makes them much smoother to use. <br/>
 2: Automap the 8 knobs to devices instead of being fixed as Pan controls. <br/>
+3: Make the B and C bank usable to cover more than 8 channels
+
+All 3 problems are solved as of 2020-10-04 6:27 PM 
 
 How to Install<br/>
 1: Find the "MIDI Remote Scripts" folder for your installation of Ableton (Usually: C:\Program Files\Ableton\Resources\MIDI Remote Scripts)<br/>
