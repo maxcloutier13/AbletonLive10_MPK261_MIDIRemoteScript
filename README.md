@@ -27,15 +27,18 @@ Enjoy the super smooth movement of the relative knobs!<br/>
 v1.0 - 2020-10-04 10:43 AM <br/>
 Limitations:<br/>
 This is my first time messing with midi remote script so bear with me<br/>
-Only Bank A of the sliders/arm works right now.<br/>
+~~Only Bank A of the sliders/arm works right now.<br/>~~
 Sometimes it doesn't get the blue hand on the first device you open, selecting a second one usually makes it work.<br/>
 
 TODO:<br/>
-Fix bank B+C so it controls tracks 9-16 and 16-24 fluidly<br/>
+~~Fix bank B+C so it controls tracks 9-16 and 16-24 fluidly<br/>~~
+~~Switch device (blue hand) automatically when selecting another channel<br/>~~
 Set up my Preset so it can be dumped directly to the mpk from Ableton (Sysex?)<br/>
-Switch device (blue hand) automatically when selecting another channel<br/>
-Implement red box functionality<br/>
 
+v1.1 fixed the autoswitch device when selecting another channel
+
+v1.2 - 2020-10-04 6:27 PM
+Bank B and C entirely functionnal with the arm buttons and sliders activating channels 9-15 and 16-24 as would be expected
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- KUDOS --<br/>
