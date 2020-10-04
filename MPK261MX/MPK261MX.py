@@ -1,4 +1,3 @@
-#Embedded file name: /Users/versonator/Jenkins/live/output/mac_64_static/Release/python-bundle/MIDI Remote Scripts/MPK261MX/MPK261MX.py
 from __future__ import with_statement
 import Live
 from _Framework.ControlSurface import ControlSurface
@@ -78,6 +77,7 @@ class MPK261MX(ControlSurface):
             drum_rack.set_enabled(True)
             transport = TransportComponent(name='Transport', is_enabled=False, layer=Layer(play_button=midimap['Play'], record_button=midimap['Record'], stop_button=midimap['Stop'], seek_forward_button=midimap['Forward'], seek_backward_button=midimap['Backward'], loop_button=midimap['Loop']))
             transport.set_enabled(True)
+            #MAX - This "Device" object enables the automapping of the encoders
             device = DeviceComponent(name='Device', is_enabled=False, layer=Layer(parameter_controls=midimap['Encoders']))
             device.set_enabled(True)
             self.set_device_component(device)
