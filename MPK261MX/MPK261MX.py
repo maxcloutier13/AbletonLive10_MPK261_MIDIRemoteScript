@@ -1,3 +1,9 @@
+#v1.0
+#   -Sets the encoder knobs to relative instead of absolute (Remember to also change setting on the mpk261 preset
+#   -The 8 encoders now auto-map to selected device (blue hand) instead of being pan knobs. Who needs constant pan knobs?
+#v1.1
+#   -Encoder auto-map now auto switches with selected track
+
 from __future__ import with_statement
 import Live
 from _Framework.ControlSurface import ControlSurface
@@ -10,6 +16,9 @@ from _Framework.EncoderElement import EncoderElement
 from _Framework.MidiMap import MidiMap as MidiMapBase
 from _Framework.MidiMap import make_button, make_encoder, make_slider
 from _Framework.InputControlElement import MIDI_NOTE_TYPE, MIDI_CC_TYPE
+
+#Global variables
+mixer = None #Global so it can be manipulated everywhere
 
 #Custom make_encoder function to use RELATIVE knobs instead of the default absolute
 def make_encoder(name, channel, number, midi_message_type):
@@ -34,6 +43,8 @@ class MPK261MX(ControlSurface):
 
     def __init__(self, *a, **k):
         super(MPK261MX, self).__init__(*a, **k)
+        self.show_message("-----------------------= MPK261MX LOADING - maxcloutier13 says hi =----------------------------------------------------------")
+        self.log_message("-----------------------= MPK261MX LOADING - maxcloutier13 says hi =----------------------------------------------------------")
         with self.component_guard():
             midimap = MidiMap()
             drum_rack = DrumRackComponent(name='Drum_Rack', is_enabled=False, layer=Layer(pads=midimap['Drum_Pads']))
@@ -41,10 +52,9 @@ class MPK261MX(ControlSurface):
             transport = TransportComponent(name='Transport', is_enabled=False, layer=Layer(play_button=midimap['Play'], record_button=midimap['Record'], stop_button=midimap['Stop'], seek_forward_button=midimap['Forward'], seek_backward_button=midimap['Backward'], loop_button=midimap['Loop']))
             transport.set_enabled(True)
             #MAX - This "Device" object enables the automapping of the encoders
-            device = DeviceComponent(name='Device', is_enabled=False, layer=Layer(parameter_controls=midimap['Encoders']))
+            device = DeviceComponent(name='Device', is_enabled=False, layer=Layer(parameter_controls=midimap['Encoders']), device_selection_follows_track_selection=True)
             device.set_enabled(True)
             self.set_device_component(device)
-            #Mixer0 1-8 on channel 1
             mixer_size = len(midimap['Sliders'])
             mixer = MixerComponent(mixer_size, name='Mixer', is_enabled=False, layer=Layer(volume_controls=midimap['Sliders'], arm_buttons=midimap['Arm_Buttons']))
             mixer.set_enabled(True)
