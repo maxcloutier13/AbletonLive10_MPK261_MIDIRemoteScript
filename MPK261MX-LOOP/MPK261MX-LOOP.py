@@ -34,12 +34,12 @@ class MidiMap(MidiMapBase):
         self.add_matrix('Encoders', make_encoder, 0, [[22, 23, 24, 25, 26,  27, 28, 29]], MIDI_CC_TYPE)
         self.add_matrix('Drum_Pads', make_button, 1, [[81, 83, 84, 86],[74, 76, 77, 79], [67, 69, 71, 72],[60, 62, 64, 65]], MIDI_NOTE_TYPE)
 
-class MPK261MX(ControlSurface):
+class MPK261MXLOOP(ControlSurface):
 
     def __init__(self, *a, **k):
-        super(MPK261MX, self).__init__(*a, **k)
-        self.show_message("-----------------------= MPK261MX LOADING - maxcloutier13 says hi =----------------------------------------------------------")
-        self.log_message("-----------------------= MPK261MX LOADING - maxcloutier13 says hi =----------------------------------------------------------")
+        super(MPK261MXLOOP, self).__init__(*a, **k)
+        self.show_message("-----------------------= MPK261MXLOOP LOADING - maxcloutier13 says hi =----------------------------------------------------------")
+        self.log_message("-----------------------= MPK261MXLOOP LOADING - maxcloutier13 says hi =----------------------------------------------------------")
         with self.component_guard():
             midimap = MidiMap()
             #Super crude manual init for the custom buttons and faders 
