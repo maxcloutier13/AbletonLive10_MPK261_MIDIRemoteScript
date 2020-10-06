@@ -43,7 +43,7 @@ class MPK261MX(ControlSurface):
         with self.component_guard():
             midimap = MidiMap()
             #Super crude manual init for the custom buttons and faders 
-            #Bank A - Channel 1
+            #Bank A - Channel 1 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             self._Encoder0 = EncoderElement(MIDI_CC_TYPE,1,22, Live.MidiMap.MapMode.relative_two_compliment, name='Encoder0')
             self._Encoder1 = EncoderElement(MIDI_CC_TYPE,1,23, Live.MidiMap.MapMode.relative_two_compliment, name='Encoder1')
             self._Encoder2 = EncoderElement(MIDI_CC_TYPE,1,24, Live.MidiMap.MapMode.relative_two_compliment, name='Encoder2')
@@ -68,7 +68,7 @@ class MPK261MX(ControlSurface):
             self._VolumeSlider5 = SliderElement(MIDI_CC_TYPE, 0, 17, name='VolumeSlider5')
             self._VolumeSlider6 = SliderElement(MIDI_CC_TYPE, 0, 18, name='VolumeSlider6')
             self._VolumeSlider7 = SliderElement(MIDI_CC_TYPE, 0, 19, name='VolumeSlider7')
-            #Bank B - Channel 2
+            #Bank B - Channel 2 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             self._Encoder8 = EncoderElement(MIDI_CC_TYPE,2,22, Live.MidiMap.MapMode.relative_two_compliment, name='Encoder8')
             self._Encoder9 = EncoderElement(MIDI_CC_TYPE,2,23, Live.MidiMap.MapMode.relative_two_compliment, name='Encoder9')
             self._Encoder10 = EncoderElement(MIDI_CC_TYPE,2,24, Live.MidiMap.MapMode.relative_two_compliment, name='Encoder10')
@@ -93,7 +93,7 @@ class MPK261MX(ControlSurface):
             self._VolumeSlider13 = SliderElement(MIDI_CC_TYPE, 1, 17, name='VolumeSlider13')
             self._VolumeSlider14 = SliderElement(MIDI_CC_TYPE, 1, 18, name='VolumeSlider14')
             self._VolumeSlider15 = SliderElement(MIDI_CC_TYPE, 1, 19, name='VolumeSlider15')
-            #Bank C - Channel 3
+            #Bank C - Channel 3 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             self._Encoder16 = EncoderElement(MIDI_CC_TYPE,3,22, Live.MidiMap.MapMode.relative_two_compliment, name='Encoder16')
             self._Encoder17 = EncoderElement(MIDI_CC_TYPE,3,23, Live.MidiMap.MapMode.relative_two_compliment, name='Encoder17')
             self._Encoder18 = EncoderElement(MIDI_CC_TYPE,3,24, Live.MidiMap.MapMode.relative_two_compliment, name='Encoder18')
@@ -118,22 +118,21 @@ class MPK261MX(ControlSurface):
             self._VolumeSlider21 = SliderElement(MIDI_CC_TYPE, 2, 17, name='VolumeSlider21')
             self._VolumeSlider22 = SliderElement(MIDI_CC_TYPE, 2, 18, name='VolumeSlider22')
             self._VolumeSlider23 = SliderElement(MIDI_CC_TYPE, 2, 19, name='VolumeSlider23')
-            #Drum rack
+            #Drum rack -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             drum_rack = DrumRackComponent(name='Drum_Rack', is_enabled=False, layer=Layer(pads=midimap['Drum_Pads']))
             drum_rack.set_enabled(True)
+            #Transport -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             transport = TransportComponent(name='Transport', is_enabled=False, layer=Layer(play_button=midimap['Play'], record_button=midimap['Record'], stop_button=midimap['Stop'], loop_button=midimap['Loop']))
             #, seek_forward_button=midimap['Forward'], seek_backward_button=midimap['Backward']
             transport.set_enabled(True)
             #Make the Back/Fwd button just normal mapable CC senders
             self._BackButton = ButtonElement(False, MIDI_CC_TYPE, 0, 116, name='BackButton')
             self._FwdButton = ButtonElement(False, MIDI_CC_TYPE, 0, 115, name='FwdButton')
-            #self.add_button('Forward', 0, 115, MIDI_CC_TYPE)
-            #self.add_button('Backward', 0, 116, MIDI_CC_TYPE)
-            #This "Device" object enables the automapping of the encoders
+            #Device -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             self._device = DeviceComponent(name='Device', is_enabled=False, layer=Layer(parameter_controls=midimap['Encoders']), device_selection_follows_track_selection=True)
             self._device.set_enabled(True)
             self.set_device_component(self._device)
-            #Set mixer to full size
+            #Mixer -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             mixer_size = 24
             self._mixer = MixerComponent(mixer_size, name='Mixer', is_enabled=False)
             #Super crude and repetitive mapping because after all this shit I'm not spending time learning how to loop this crap hehe
@@ -165,3 +164,4 @@ class MPK261MX(ControlSurface):
             self._mixer.channel_strip(22).layer = Layer(volume_control = self._VolumeSlider22, arm_button=self._ArmButton22, pan_control=self._Encoder22)
             self._mixer.channel_strip(23).layer = Layer(volume_control = self._VolumeSlider23, arm_button=self._ArmButton23, pan_control=self._Encoder23)
             self._mixer.set_enabled(True)
+#-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

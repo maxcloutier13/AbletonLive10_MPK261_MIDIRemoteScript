@@ -36,12 +36,17 @@ Sometimes it doesn't get the blue hand on the first device you open, selecting a
 TODO:<br/>
 ~~Fix bank B+C so it controls tracks 9-16 and 16-24 fluidly<br/>~~
 ~~Switch device (blue hand) automatically when selecting another channel<br/>~~
-Set up my Preset so it can be dumped directly to the mpk from Ableton (Sysex?)<br/>
+-Set up my Preset so it can be dumped directly to the mpk from Ableton (Sysex?)<br/>
 
 v1.1 fixed the autoswitch device when selecting another channel  
 
 v1.2 - 2020-10-04 6:27 PM  
-Bank B and C entirely functionnal with the arm buttons and sliders activating channels 9-15 and 16-24 as would be expected  
+-Bank B and C entirely functionnal with the arm buttons and sliders activating channels 9-15 and 16-24 as would be expected  
+
+v1.3 - 2020-10-05 10:23 PM 
+-Removed Back/Fwd from Transport to be used as relative Prev/Next in VST instruments
+-Encoders on channel 1 automap to device. Channel 2-3-4 control the pan and follows the bank selection on all 24 tracks
+-Meant to be used with a "play" preset with all knobs set to 1 ... and a "mixer" preset with 2-3-4 for 24 track panning
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- KUDOS --<br/>
