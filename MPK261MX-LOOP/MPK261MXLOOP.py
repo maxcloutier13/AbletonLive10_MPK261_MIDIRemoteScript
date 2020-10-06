@@ -32,7 +32,7 @@ class MidiMap(MidiMapBase):
         self.add_button('Stop', 0, 117, MIDI_CC_TYPE)
         self.add_button('Loop', 0, 114, MIDI_CC_TYPE)
         self.add_matrix('Encoders', make_encoder, 0, [[22, 23, 24, 25, 26,  27, 28, 29]], MIDI_CC_TYPE)
-        self.add_matrix('Drum_Pads', make_button, 1, [[81, 83, 84, 86],[74, 76, 77, 79], [67, 69, 71, 72],[60, 62, 64, 65]], MIDI_NOTE_TYPE)
+        #self.add_matrix('Drum_Pads', make_button, 1, [[81, 83, 84, 86],[74, 76, 77, 79], [67, 69, 71, 72],[60, 62, 64, 65]], MIDI_NOTE_TYPE)
 
 class MPK261MXLOOP(ControlSurface):
 
@@ -43,7 +43,7 @@ class MPK261MXLOOP(ControlSurface):
         with self.component_guard():
             midimap = MidiMap()
             #Super crude manual init for the custom buttons and faders 
-            #Bank A - Channel 1 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            #Control Bank A - Channel 1 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             self._Encoder0 = EncoderElement(MIDI_CC_TYPE,1,22, Live.MidiMap.MapMode.relative_two_compliment, name='Encoder0')
             self._Encoder1 = EncoderElement(MIDI_CC_TYPE,1,23, Live.MidiMap.MapMode.relative_two_compliment, name='Encoder1')
             self._Encoder2 = EncoderElement(MIDI_CC_TYPE,1,24, Live.MidiMap.MapMode.relative_two_compliment, name='Encoder2')
@@ -68,7 +68,7 @@ class MPK261MXLOOP(ControlSurface):
             self._VolumeSlider5 = SliderElement(MIDI_CC_TYPE, 0, 17, name='VolumeSlider5')
             self._VolumeSlider6 = SliderElement(MIDI_CC_TYPE, 0, 18, name='VolumeSlider6')
             self._VolumeSlider7 = SliderElement(MIDI_CC_TYPE, 0, 19, name='VolumeSlider7')
-            #Bank B - Channel 2 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            #Control Bank B - Channel 2 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             self._Encoder8 = EncoderElement(MIDI_CC_TYPE,2,22, Live.MidiMap.MapMode.relative_two_compliment, name='Encoder8')
             self._Encoder9 = EncoderElement(MIDI_CC_TYPE,2,23, Live.MidiMap.MapMode.relative_two_compliment, name='Encoder9')
             self._Encoder10 = EncoderElement(MIDI_CC_TYPE,2,24, Live.MidiMap.MapMode.relative_two_compliment, name='Encoder10')
@@ -93,7 +93,7 @@ class MPK261MXLOOP(ControlSurface):
             self._VolumeSlider13 = SliderElement(MIDI_CC_TYPE, 1, 17, name='VolumeSlider13')
             self._VolumeSlider14 = SliderElement(MIDI_CC_TYPE, 1, 18, name='VolumeSlider14')
             self._VolumeSlider15 = SliderElement(MIDI_CC_TYPE, 1, 19, name='VolumeSlider15')
-            #Bank C - Channel 3 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            #Control Bank C - Channel 3 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             self._Encoder16 = EncoderElement(MIDI_CC_TYPE,3,22, Live.MidiMap.MapMode.relative_two_compliment, name='Encoder16')
             self._Encoder17 = EncoderElement(MIDI_CC_TYPE,3,23, Live.MidiMap.MapMode.relative_two_compliment, name='Encoder17')
             self._Encoder18 = EncoderElement(MIDI_CC_TYPE,3,24, Live.MidiMap.MapMode.relative_two_compliment, name='Encoder18')
@@ -118,8 +118,15 @@ class MPK261MXLOOP(ControlSurface):
             self._VolumeSlider21 = SliderElement(MIDI_CC_TYPE, 2, 17, name='VolumeSlider21')
             self._VolumeSlider22 = SliderElement(MIDI_CC_TYPE, 2, 18, name='VolumeSlider22')
             self._VolumeSlider23 = SliderElement(MIDI_CC_TYPE, 2, 19, name='VolumeSlider23')
+            #Drum Bank A - Channel 4--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            self._Pad0 = ButtonElement(True, MIDI_CC_TYPE, 3, 81, name='Pad0')
+            #Drum Bank B -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            #Drum Bank C -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            #Drum Bank D -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            #[81, 83, 84, 86],[74, 76, 77, 79], [67, 69, 71, 72],[60, 62, 64, 65]
             #Drum rack -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-            drum_rack = DrumRackComponent(name='Drum_Rack', is_enabled=False, layer=Layer(pads=midimap['Drum_Pads']))
+            drum_rack = DrumRackComponent(name='Drum_Rack', is_enabled=False)
+            drum_rack.pads(0).layer = Layer(pad = self._Pad0)
             drum_rack.set_enabled(True)
             #Transport -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             transport = TransportComponent(name='Transport', is_enabled=False, layer=Layer(play_button=midimap['Play'], record_button=midimap['Record'], stop_button=midimap['Stop'], loop_button=midimap['Loop']))
