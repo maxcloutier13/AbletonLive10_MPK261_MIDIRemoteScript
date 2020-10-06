@@ -136,9 +136,9 @@ class MPK261MXLOOP(ControlSurface):
             self._BackButton = ButtonElement(False, MIDI_CC_TYPE, 0, 116, name='BackButton')
             self._FwdButton = ButtonElement(False, MIDI_CC_TYPE, 0, 115, name='FwdButton')
             #Device -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-            self._device = DeviceComponent(name='Device', is_enabled=False, layer=Layer(parameter_controls=midimap['Encoders']), device_selection_follows_track_selection=True)
-            self._device.set_enabled(True)
-            self.set_device_component(self._device)
+            #self._device = DeviceComponent(name='Device', is_enabled=False, layer=Layer(parameter_controls=midimap['Encoders']), device_selection_follows_track_selection=True)
+            #self._device.set_enabled(True)
+            #self.set_device_component(self._device)
             #Mixer -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             mixer_size = 24
             self._mixer = MixerComponent(mixer_size, name='Mixer', is_enabled=False)
