@@ -119,14 +119,32 @@ class MPK261MXLOOP(ControlSurface):
             self._VolumeSlider22 = SliderElement(MIDI_CC_TYPE, 2, 18, name='VolumeSlider22')
             self._VolumeSlider23 = SliderElement(MIDI_CC_TYPE, 2, 19, name='VolumeSlider23')
             #Drum Bank A - Channel 4--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-            self._Pad0 = ButtonElement(True, MIDI_CC_TYPE, 3, 81, name='Pad0')
+            self._Pad0 = ButtonElement(True, MIDI_NOTE_TYPE, 3, 81, name='Pad0')
+            self._Pad1 = ButtonElement(True, MIDI_NOTE_TYPE, 3, 83, name='Pad1')
+            self._Pad2 = ButtonElement(True, MIDI_NOTE_TYPE, 3, 84, name='Pad2')
+            self._Pad3 = ButtonElement(True, MIDI_NOTE_TYPE, 3, 86, name='Pad3')
+            self._Pad4 = ButtonElement(True, MIDI_NOTE_TYPE, 3, 74, name='Pad4')
+            self._Pad5 = ButtonElement(True, MIDI_NOTE_TYPE, 3, 76, name='Pad5')
+            self._Pad6 = ButtonElement(True, MIDI_NOTE_TYPE, 3, 77, name='Pad6')
+            self._Pad7 = ButtonElement(True, MIDI_NOTE_TYPE, 3, 79, name='Pad7')
+            self._Pad8 = ButtonElement(True, MIDI_NOTE_TYPE, 3, 67, name='Pad8')
+            self._Pad9 = ButtonElement(True, MIDI_NOTE_TYPE, 3, 69, name='Pad9')
+            self._Pad10 = ButtonElement(True, MIDI_NOTE_TYPE, 3, 71, name='Pad10')
+            self._Pad11 = ButtonElement(True, MIDI_NOTE_TYPE, 3, 72, name='Pad11')
+            self._Pad12 = ButtonElement(True, MIDI_NOTE_TYPE, 3, 60, name='Pad12')
+            self._Pad13 = ButtonElement(True, MIDI_NOTE_TYPE, 3, 62, name='Pad13')
+            self._Pad14 = ButtonElement(True, MIDI_NOTE_TYPE, 3, 64, name='Pad14')
+            self._Pad15 = ButtonElement(True, MIDI_NOTE_TYPE, 3, 65, name='Pad15')
+            self._Pads = ButtonMatrixElement(rows=[[self._Pad0, self._Pad1, self._Pad2, self._Pad3],
+                                              [self._Pad4, self._Pad5, self._Pad6, self._Pad7], 
+                                              [self._Pad8, self._Pad9, self._Pad10, self._Pad11],
+                                              [self._Pad12, self._Pad13, self._Pad14, self._Pad15]])
             #Drum Bank B -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             #Drum Bank C -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             #Drum Bank D -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-            #[81, 83, 84, 86],[74, 76, 77, 79], [67, 69, 71, 72],[60, 62, 64, 65]
+            #
             #Drum rack -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-            drum_rack = DrumRackComponent(name='Drum_Rack', is_enabled=False)
-            drum_rack.pads(0).layer = Layer(pad = self._Pad0)
+            drum_rack = DrumRackComponent(name='Drum_Rack', is_enabled=False, layer=Layer(pads=self._Pads))
             drum_rack.set_enabled(True)
             #Transport -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             transport = TransportComponent(name='Transport', is_enabled=False, layer=Layer(play_button=midimap['Play'], record_button=midimap['Record'], stop_button=midimap['Stop'], loop_button=midimap['Loop']))
@@ -136,9 +154,9 @@ class MPK261MXLOOP(ControlSurface):
             self._BackButton = ButtonElement(False, MIDI_CC_TYPE, 0, 116, name='BackButton')
             self._FwdButton = ButtonElement(False, MIDI_CC_TYPE, 0, 115, name='FwdButton')
             #Device -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-            #self._device = DeviceComponent(name='Device', is_enabled=False, layer=Layer(parameter_controls=midimap['Encoders']), device_selection_follows_track_selection=True)
-            #self._device.set_enabled(True)
-            #self.set_device_component(self._device)
+            self._device = DeviceComponent(name='Device', is_enabled=False, layer=Layer(parameter_controls=midimap['Encoders']), device_selection_follows_track_selection=True)
+            self._device.set_enabled(True)
+            self.set_device_component(self._device)
             #Mixer -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             mixer_size = 24
             self._mixer = MixerComponent(mixer_size, name='Mixer', is_enabled=False)
