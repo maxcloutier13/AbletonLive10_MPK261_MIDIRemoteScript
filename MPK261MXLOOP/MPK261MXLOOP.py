@@ -42,6 +42,9 @@ class MPK261MXLOOP(ControlSurface):
         self.log_message("-----------------------= MPK261MXLOOP LOADING - maxcloutier13 says hi =----------------------------------------------------------")
         with self.component_guard():
             midimap = MidiMap()
+            #Attempt to make relative Track Launcher trigger
+            self._LoopRecordButton = ButtonElement(True, MIDI_CC_TYPE, 0, 65)
+            self._LoopRecordButton.add_value_listener(self._launch_clip, False)
             #Super crude manual init for the custom buttons and faders 
             #Control Bank A - Channel 1 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             self._Encoder0 = EncoderElement(MIDI_CC_TYPE,1,22, Live.MidiMap.MapMode.relative_two_compliment, name='Encoder0')
@@ -136,9 +139,9 @@ class MPK261MXLOOP(ControlSurface):
             self._Pad14 = ButtonElement(True, MIDI_NOTE_TYPE, 3, 64, name='Pad14')
             self._Pad15 = ButtonElement(True, MIDI_NOTE_TYPE, 3, 65, name='Pad15')
             self._Pads = ButtonMatrixElement(rows=[[self._Pad0, self._Pad1, self._Pad2, self._Pad3],
-                                              [self._Pad4, self._Pad5, self._Pad6, self._Pad7], 
-                                              [self._Pad8, self._Pad9, self._Pad10, self._Pad11],
-                                              [self._Pad12, self._Pad13, self._Pad14, self._Pad15]])
+                                                   [self._Pad4, self._Pad5, self._Pad6, self._Pad7], 
+                                                   [self._Pad8, self._Pad9, self._Pad10, self._Pad11],
+                                                   [self._Pad12, self._Pad13, self._Pad14, self._Pad15]])
             #Drum Bank B -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             #Drum Bank C -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             #Drum Bank D -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -189,4 +192,17 @@ class MPK261MXLOOP(ControlSurface):
             self._mixer.channel_strip(22).layer = Layer(volume_control = self._VolumeSlider22, arm_button=self._ArmButton22, pan_control=self._Encoder22)
             self._mixer.channel_strip(23).layer = Layer(volume_control = self._VolumeSlider23, arm_button=self._ArmButton23, pan_control=self._Encoder23)
             self._mixer.set_enabled(True)
+            #Track change listener
+            self.song().view.add_selected_track_listener(self._update_selected_device)
+            
+    def _update_selected_device(self):
+        track = self.song().view.selected_track
+        self.show_message("----- Track changed! -----")
+    
+    #Trigger on CC65
+    def _launch_clip(self, value):
+        if value > 0:
+            self.show_message("----- Track launch! -----")
+            #Trigger that motherfucker
+            currentSong = self.song().view.highlighted_clip_slot.set_fire_button_state(True)
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
