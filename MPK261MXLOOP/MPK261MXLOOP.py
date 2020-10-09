@@ -19,6 +19,8 @@ from _Framework.MidiMap import MidiMap as MidiMapBase
 from _Framework.MidiMap import make_button, make_encoder, make_slider
 from _Framework.InputControlElement import MIDI_NOTE_TYPE, MIDI_CC_TYPE
 
+_overdub_flag = 0
+
 #Custom make_encoder function to use RELATIVE knobs instead of the default absolute
 def make_encoder(name, channel, number, midi_message_type):
  return EncoderElement(midi_message_type, channel, number, Live.MidiMap.MapMode.relative_two_compliment, name=name)
@@ -200,8 +202,18 @@ class MPK261MXLOOP(ControlSurface):
         #self.show_message("----- Track changed! -----")
         
     def _launch_clip(self, value):
-        if value > 0:
-            #self.show_message("----- Track launch! -----")
-            #Trigger that motherfucker
-            currentSong = self.song().view.highlighted_clip_slot.set_fire_button_state(True)
+        global _overdub_flag
+        #self.log_message("--> Track launch! -----")
+        #self.song().view.highlighted_clip_slot.set_fire_button_state(True)
+        _current_slot = self.song().view.highlighted_clip_slot 
+        if _current_slot.is_playing == 0 and _current_slot.is_recording == 0:            
+            self.song().view.highlighted_clip_slot.set_fire_button_state(True)
+        elif _current_slot.is_playing == 1 and _current_slot.is_recording == 0:
+            self.song().overdub = 1
+            _overdub_flag = 1
+        elif _current_slot.is_playing == 1 and _current_slot.is_recording == 1 and _overdub_flag == 1:
+            self.song().overdub = 0
+            _overdub_flag = 0
+        else:
+            self.song().view.highlighted_clip_slot.set_fire_button_state(True)
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
