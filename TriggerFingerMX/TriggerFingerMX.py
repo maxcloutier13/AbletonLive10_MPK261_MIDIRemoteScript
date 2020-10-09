@@ -19,11 +19,14 @@ from _Framework.MidiMap import MidiMap as MidiMapBase
 from _Framework.MidiMap import make_button, make_encoder, make_slider
 from _Framework.InputControlElement import MIDI_NOTE_TYPE, MIDI_CC_TYPE
 
+#Global playing flag. Bet it exists. Ah well. 
+_is_playing = 0
+
 class TriggerFingerMX(ControlSurface):
 
     def __init__(self, *a, **k):
         super(TriggerFingerMX, self).__init__(*a, **k)
-        #self.show_message("-----------------------= TriggerFingerMX v0.4 LOADING - maxcloutier13 says hi =----------------------------------------------------------")
+        self.show_message("-----------------------= TriggerFingerMX v0.4 LOADING - maxcloutier13 says hi =----------------------------------------------------------")
         self.log_message("-----------------------= TriggerFingerMX LOADING - maxcloutier13 says hi =----------------------------------------------------------")
         with self.component_guard():
             self._init_controls()
@@ -85,17 +88,33 @@ class TriggerFingerMX(ControlSurface):
         if value > 0:
             #Prep new clip
             self.show_message("TFMX Debug: Pad0 triggered")
-            
-    def _trig_pad1(self, value):        
+    
+    #Play/Pause        
+    def _trig_pad1(self, value):                
         if value > 0:
-            self.show_message("TFMX Debug: Pad1 triggered")
+            global _is_playing
+            if _is_playing == 0:                
+                #Not playing: unpause
+                _is_playing = 1
+                self.song().continue_playing()
+            else:
+                #Playing: pause
+                _is_playing = 0
+                self.song().stop_playing()
             
     def _trig_pad2(self, value):        
         if value > 0:
-            self.show_message("TFMX Debug: Pad2 triggered")
-
+            global _is_playing
+            if _is_playing == 0:
+                #Not playing: return to start
+                self.song().stop_playing()
+            else:
+                #Playing: Stop
+                self.song().stop_playing()
+    #Launch clip
     def _trig_pad3(self, value):        
         if value > 0:
+            self._launch_clip()
             self.show_message("TFMX Debug: Pad3 triggered")
 
     #2nd row
@@ -195,5 +214,11 @@ class TriggerFingerMX(ControlSurface):
             if not only_visible or track.is_visible:
                 tracks.append(track)
         #Include the master track?
-        tracks.append(self.song.master_track)
+        #NOPE tracks.append(self.song().master_track)
         return tracks
+        
+    def _launch_clip(self, value):
+        if value > 0:
+            #self.show_message("----- Track launch! -----")
+            #Trigger that motherfucker
+            currentSong = self.song().view.highlighted_clip_slot.set_fire_button_state(True)
