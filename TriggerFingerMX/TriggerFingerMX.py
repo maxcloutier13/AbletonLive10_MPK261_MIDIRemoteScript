@@ -108,12 +108,6 @@ class TriggerFingerMX(ControlSurface):
             self._move_track(1)
             self.show_message("TFMX Debug: Pad5 triggered")
             
-    def get_all_tracks(self, only_visible = False):
-        tracks = []
-        for track in self.song().tracks:
-            if not only_visible or track.is_visible:
-                tracks.append(track)
-        return tracks
     #-- Move down        
     def _trig_pad6(self, value):        
         if value > 0:
@@ -194,3 +188,12 @@ class TriggerFingerMX(ControlSurface):
                         self.song().view.selected_track = tracks[0]
                     else:
                         self.song().view.selected_track = tracks[i+1]
+                        
+    def get_all_tracks(self, only_visible = False):
+        tracks = []
+        for track in self.song().tracks:
+            if not only_visible or track.is_visible:
+                tracks.append(track)
+        #Include the master track?
+        tracks.append(self.song.master_track)
+        return tracks
