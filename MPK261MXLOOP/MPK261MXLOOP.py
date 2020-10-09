@@ -197,12 +197,11 @@ class MPK261MXLOOP(ControlSurface):
             
     def _update_selected_device(self):
         track = self.song().view.selected_track
-        self.show_message("----- Track changed! -----")
-    
-    #Trigger on CC65
+        #self.show_message("----- Track changed! -----")
+        
     def _launch_clip(self, value):
         if value > 0:
-            self.show_message("----- Track launch! -----")
+            #self.show_message("----- Track launch! -----")
             #Trigger that motherfucker
             currentSong = self.song().view.highlighted_clip_slot.set_fire_button_state(True)
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
