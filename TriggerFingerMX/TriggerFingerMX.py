@@ -114,7 +114,7 @@ class TriggerFingerMX(ControlSurface):
     #Launch clip
     def _trig_pad3(self, value):        
         if value > 0:
-            self._launch_clip()
+            self._launch_clip(False)
             self.show_message("TFMX Debug: Pad3 triggered")
 
     #2nd row
@@ -217,8 +217,8 @@ class TriggerFingerMX(ControlSurface):
         #NOPE tracks.append(self.song().master_track)
         return tracks
         
-    def _launch_clip(self, value):
-        if value > 0:
-            #self.show_message("----- Track launch! -----")
-            #Trigger that motherfucker
-            currentSong = self.song().view.highlighted_clip_slot.set_fire_button_state(True)
+    def _launch_clip(self, value):        
+        #Trigger that motherfucker
+        self.log_message("------------------------------- Should fire the bitch")
+        currentSong = self.song().view.highlighted_clip_slot.set_fire_button_state(True)
+        
