@@ -44,9 +44,19 @@ class MPK261MXLOOP(ControlSurface):
         self.log_message("-----------------------= MPK261MXLOOP LOADING - maxcloutier13 says hi =----------------------------------------------------------")
         with self.component_guard():
             midimap = MidiMap()
-            #Attempt to make relative Track Launcher trigger
+            #Sustain pedal 2 = Play/Record/Overdub switch for live looping
             self._LoopRecordButton = ButtonElement(True, MIDI_CC_TYPE, 0, 65)
             self._LoopRecordButton.add_value_listener(self._launch_clip, False)
+            #Control up/down/left/right using the daw controls            
+            self._UpButton = ButtonElement(False, MIDI_CC_TYPE, 0, 88, name='UpButton')
+            self._DownButton = ButtonElement(False, MIDI_CC_TYPE, 0, 89, name='DownButton')
+            self._LeftButton = ButtonElement(False, MIDI_CC_TYPE, 0, 20, name='LeftButton')
+            self._RightButton = ButtonElement(False, MIDI_CC_TYPE, 0, 21, name='RightButton')
+            #Listeners for the functions
+            self._UpButton.add_value_listener(self._move_up, False)
+            self._DownButton.add_value_listener(self._move_down, False)
+            self._LeftButton.add_value_listener(self._move_left, False)
+            self._RightButton.add_value_listener(self._move_right, False)
             #Super crude manual init for the custom buttons and faders 
             #Control Bank A - Channel 1 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             self._Encoder0 = EncoderElement(MIDI_CC_TYPE,1,22, Live.MidiMap.MapMode.relative_two_compliment, name='Encoder0')
@@ -196,11 +206,13 @@ class MPK261MXLOOP(ControlSurface):
             self._mixer.set_enabled(True)
             #Track change listener
             self.song().view.add_selected_track_listener(self._update_selected_device)
-            
+    
+    #Track changed    
     def _update_selected_device(self):
         track = self.song().view.selected_track
         #self.show_message("----- Track changed! -----")
-        
+    
+    #Launch/Record/Overdub    
     def _launch_clip(self, value):
         global _overdub_flag
         #self.log_message("--> Track launch! -----")
@@ -216,4 +228,65 @@ class MPK261MXLOOP(ControlSurface):
             _overdub_flag = 0
         else:
             self.song().view.highlighted_clip_slot.set_fire_button_state(True)
+    
+    #Move up/down
+    def _move_clipslot(self, up):
+        scene = self.song().view.selected_scene
+        scenes = self.song().scenes
+        max_scenes = len(scenes)
+        for i in range(max_scenes):
+            if scene == scenes[i]:
+                #Found our guy
+                if up == 1:
+                    self.song().view.selected_scene = scenes[i-1]
+                    self.show_message("TFMX Debug: Up!")
+                else:
+                    if scene == scenes[max_scenes-1]:
+                        self.song().view.selected_scene = scenes[0]
+                    else:
+                        self.song().view.selected_scene = scenes[i+1]
+                    self.show_message("TFMX Debug: Down!")
+    
+    #Move left/right
+    def _move_track(self, left):
+        #Get track and tracks
+        track = self.song().view.selected_track
+        tracks = self.get_all_tracks(only_visible = True)
+        max_tracks = len(tracks)
+        #Iterate to find current track's index.
+        for i in range(max_tracks):
+            if track == tracks[i]:
+                #Found our track
+                if left == 1:
+                    self.song().view.selected_track = tracks[i-1]
+                else:
+                    if track == tracks[max_tracks-1]:
+                        self.song().view.selected_track = tracks[0]
+                    else:
+                        self.song().view.selected_track = tracks[i+1]
+                        
+    def get_all_tracks(self, only_visible = False):
+        tracks = []
+        for track in self.song().tracks:
+            if not only_visible or track.is_visible:
+                tracks.append(track)
+        #Include the master track?
+        #NOPE tracks.append(self.song().master_track)
+        return tracks
+        
+    def _move_up(self, value):
+        if value > 0:
+            self._move_clipslot(1)
+            
+    def _move_down(self, value):
+        if value > 0:
+            self._move_clipslot(0)
+            
+    def _move_left(self, value):
+        if value > 0:
+            self._move_track(1)
+    
+    def _move_right(self, value):
+        if value > 0:
+            self._move_track(1)
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
