@@ -135,34 +135,104 @@ class MPK261MXLOOP(ControlSurface):
             self._VolumeSlider21 = SliderElement(MIDI_CC_TYPE, 2, 17, name='VolumeSlider21')
             self._VolumeSlider22 = SliderElement(MIDI_CC_TYPE, 2, 18, name='VolumeSlider22')
             self._VolumeSlider23 = SliderElement(MIDI_CC_TYPE, 2, 19, name='VolumeSlider23')
-            #Drum Bank A - Channel 4--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-            self._Pad0 = ButtonElement(True, MIDI_NOTE_TYPE, 3, 81, name='Pad0')
-            self._Pad1 = ButtonElement(True, MIDI_NOTE_TYPE, 3, 83, name='Pad1')
-            self._Pad2 = ButtonElement(True, MIDI_NOTE_TYPE, 3, 84, name='Pad2')
-            self._Pad3 = ButtonElement(True, MIDI_NOTE_TYPE, 3, 86, name='Pad3')
-            self._Pad4 = ButtonElement(True, MIDI_NOTE_TYPE, 3, 74, name='Pad4')
-            self._Pad5 = ButtonElement(True, MIDI_NOTE_TYPE, 3, 76, name='Pad5')
-            self._Pad6 = ButtonElement(True, MIDI_NOTE_TYPE, 3, 77, name='Pad6')
-            self._Pad7 = ButtonElement(True, MIDI_NOTE_TYPE, 3, 79, name='Pad7')
-            self._Pad8 = ButtonElement(True, MIDI_NOTE_TYPE, 3, 67, name='Pad8')
-            self._Pad9 = ButtonElement(True, MIDI_NOTE_TYPE, 3, 69, name='Pad9')
-            self._Pad10 = ButtonElement(True, MIDI_NOTE_TYPE, 3, 71, name='Pad10')
-            self._Pad11 = ButtonElement(True, MIDI_NOTE_TYPE, 3, 72, name='Pad11')
-            self._Pad12 = ButtonElement(True, MIDI_NOTE_TYPE, 3, 60, name='Pad12')
-            self._Pad13 = ButtonElement(True, MIDI_NOTE_TYPE, 3, 62, name='Pad13')
-            self._Pad14 = ButtonElement(True, MIDI_NOTE_TYPE, 3, 64, name='Pad14')
-            self._Pad15 = ButtonElement(True, MIDI_NOTE_TYPE, 3, 65, name='Pad15')
-            self._Pads = ButtonMatrixElement(rows=[[self._Pad0, self._Pad1, self._Pad2, self._Pad3],
+            #Drum Bank A - Channel 4--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------      
+            self._Pad0 = ButtonElement(True, MIDI_NOTE_TYPE, 5, 12, name='Pad0')        
+            self._Pad1 = ButtonElement(True, MIDI_NOTE_TYPE, 5, 14, name='Pad1')
+            self._Pad2 = ButtonElement(True, MIDI_NOTE_TYPE, 5, 16, name='Pad2')
+            self._Pad3 = ButtonElement(True, MIDI_NOTE_TYPE, 5, 17, name='Pad3')
+            #
+            self._Pad4 = ButtonElement(True, MIDI_NOTE_TYPE, 5, 19, name='Pad4')
+            self._Pad5 = ButtonElement(True, MIDI_NOTE_TYPE, 5, 21, name='Pad5')
+            self._Pad6 = ButtonElement(True, MIDI_NOTE_TYPE, 5, 23, name='Pad6')
+            self._Pad7 = ButtonElement(True, MIDI_NOTE_TYPE, 5, 24, name='Pad7')
+            #
+            self._Pad8 = ButtonElement(True, MIDI_NOTE_TYPE, 5, 26, name='Pad8')
+            self._Pad9 = ButtonElement(True, MIDI_NOTE_TYPE, 5, 28, name='Pad9')
+            self._Pad10 = ButtonElement(True, MIDI_NOTE_TYPE, 5, 29, name='Pad10')
+            self._Pad11 = ButtonElement(True, MIDI_NOTE_TYPE, 5, 31, name='Pad11')
+            #
+            self._Pad12 = ButtonElement(True, MIDI_NOTE_TYPE, 5, 33, name='Pad12')      
+            self._Pad13 = ButtonElement(True, MIDI_NOTE_TYPE, 5, 35, name='Pad13')
+            self._Pad14 = ButtonElement(True, MIDI_NOTE_TYPE, 5, 36, name='Pad14')
+            self._Pad15 = ButtonElement(True, MIDI_NOTE_TYPE, 5, 38, name='Pad15')
+            
+            #Listeners on individual pads
+            self._Pad0.add_value_listener(self._trig_pad0, False)
+            self._Pad1.add_value_listener(self._trig_pad1, False)
+            self._Pad2.add_value_listener(self._trig_pad2, False)
+            self._Pad3.add_value_listener(self._trig_pad3, False)
+            #
+            self._Pad4.add_value_listener(self._trig_pad4, False)
+            self._Pad5.add_value_listener(self._trig_pad5, False)
+            self._Pad6.add_value_listener(self._trig_pad6, False)
+            self._Pad7.add_value_listener(self._trig_pad7, False)
+            #
+            self._Pad8.add_value_listener(self._trig_pad8, False)
+            self._Pad9.add_value_listener(self._trig_pad9, False)
+            self._Pad10.add_value_listener(self._trig_pad10, False)
+            self._Pad11.add_value_listener(self._trig_pad11, False)
+            #
+            self._Pad12.add_value_listener(self._trig_pad12, False)
+            self._Pad13.add_value_listener(self._trig_pad13, False)
+            self._Pad14.add_value_listener(self._trig_pad14, False)
+            self._Pad15.add_value_listener(self._trig_pad15, False)
+            
+            self._Pads0 = ButtonMatrixElement(rows=[[self._Pad0, self._Pad1, self._Pad2, self._Pad3],
                                                    [self._Pad4, self._Pad5, self._Pad6, self._Pad7], 
                                                    [self._Pad8, self._Pad9, self._Pad10, self._Pad11],
                                                    [self._Pad12, self._Pad13, self._Pad14, self._Pad15]])
             #Drum Bank B -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            self._Pad16 = ButtonElement(True, MIDI_NOTE_TYPE, 6, 12, name='Pad16')        
+            self._Pad17 = ButtonElement(True, MIDI_NOTE_TYPE, 6, 14, name='Pad17')
+            self._Pad18 = ButtonElement(True, MIDI_NOTE_TYPE, 6, 16, name='Pad18')
+            self._Pad19 = ButtonElement(True, MIDI_NOTE_TYPE, 6, 17, name='Pad19')
+            #
+            self._Pad20 = ButtonElement(True, MIDI_NOTE_TYPE, 6, 19, name='Pad20')
+            self._Pad21 = ButtonElement(True, MIDI_NOTE_TYPE, 6, 21, name='Pad21')
+            self._Pad22 = ButtonElement(True, MIDI_NOTE_TYPE, 6, 23, name='Pad22')
+            self._Pad23 = ButtonElement(True, MIDI_NOTE_TYPE, 6, 24, name='Pad23')
+            #
+            self._Pad24 = ButtonElement(True, MIDI_NOTE_TYPE, 6, 26, name='Pad24')
+            self._Pad25 = ButtonElement(True, MIDI_NOTE_TYPE, 6, 28, name='Pad25')
+            self._Pad26 = ButtonElement(True, MIDI_NOTE_TYPE, 6, 29, name='Pad26')
+            self._Pad27 = ButtonElement(True, MIDI_NOTE_TYPE, 6, 31, name='Pad27')
+            #
+            self._Pad28 = ButtonElement(True, MIDI_NOTE_TYPE, 6, 33, name='Pad28')      
+            self._Pad29 = ButtonElement(True, MIDI_NOTE_TYPE, 6, 35, name='Pad29')
+            self._Pad30 = ButtonElement(True, MIDI_NOTE_TYPE, 6, 36, name='Pad30')
+            self._Pad31 = ButtonElement(True, MIDI_NOTE_TYPE, 6, 38, name='Pad31')
+            
+            #Listeners on individual pads
+            self._Pad16.add_value_listener(self._trig_pad16, False)
+            self._Pad17.add_value_listener(self._trig_pad17, False)
+            self._Pad18.add_value_listener(self._trig_pad18, False)
+            self._Pad19.add_value_listener(self._trig_pad19, False)
+            #
+            self._Pad20.add_value_listener(self._trig_pad20, False)
+            self._Pad21.add_value_listener(self._trig_pad21, False)
+            self._Pad22.add_value_listener(self._trig_pad22, False)
+            self._Pad23.add_value_listener(self._trig_pad23, False)
+            #
+            self._Pad24.add_value_listener(self._trig_pad24, False)
+            self._Pad25.add_value_listener(self._trig_pad25, False)
+            self._Pad26.add_value_listener(self._trig_pad26, False)
+            self._Pad27.add_value_listener(self._trig_pad27, False)
+            #
+            self._Pad28.add_value_listener(self._trig_pad28, False)
+            self._Pad29.add_value_listener(self._trig_pad29, False)
+            self._Pad30.add_value_listener(self._trig_pad30, False)
+            self._Pad31.add_value_listener(self._trig_pad31, False)
+            
+            self._Pads0 = ButtonMatrixElement(rows=[[self._Pad0, self._Pad1, self._Pad2, self._Pad3],
+                                                   [self._Pad4, self._Pad5, self._Pad6, self._Pad7], 
+                                                   [self._Pad8, self._Pad9, self._Pad10, self._Pad11],
+                                                   [self._Pad12, self._Pad13, self._Pad14, self._Pad15]])
             #Drum Bank C -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             #Drum Bank D -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             #
             #Drum rack -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-            drum_rack = DrumRackComponent(name='Drum_Rack', is_enabled=False, layer=Layer(pads=self._Pads))
-            drum_rack.set_enabled(True)
+            #drum_rack = DrumRackComponent(name='Drum_Rack', is_enabled=False, layer=Layer(pads=self._Pads))
+            #drum_rack.set_enabled(True)
             #Transport -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             transport = TransportComponent(name='Transport', is_enabled=False, layer=Layer(play_button=midimap['Play'], record_button=midimap['Record'], stop_button=midimap['Stop'], loop_button=midimap['Loop']))
             #, seek_forward_button=midimap['Forward'], seek_backward_button=midimap['Backward']
@@ -208,6 +278,146 @@ class MPK261MXLOOP(ControlSurface):
             self._mixer.set_enabled(True)
             #Track change listener
             self.song().view.add_selected_track_listener(self._update_selected_device)
+        
+    #-- DrumBank A ----------------------------------------------------------
+    def _trig_pad0(self, value):        
+        if value > 0:
+            self.show_message("TFMX Debug: Pad0 triggered")
+    
+            
+    def _trig_pad1(self, value):                
+        if value > 0: 
+            self.show_message("TFMX Debug: Pad1 triggered")
+    
+    def _trig_pad2(self, value):        
+        if value > 0:
+            self.show_message("TFMX Debug: Pad2 triggered")
+                
+   
+    def _trig_pad3(self, value):        
+        if value > 0:
+            self.show_message("TFMX Debug: Pad3 triggered")
+
+    #2nd row
+    def _trig_pad4(self, value):        
+        if value > 0:
+            self.show_message("TFMX Debug: Pad4 triggered")
+ 
+    def _trig_pad5(self, value):        
+        if value > 0:
+            self.show_message("TFMX Debug: Pad5 triggered")
+                  
+    def _trig_pad6(self, value):        
+        if value > 0:            
+            self.show_message("TFMX Debug: Pad6 triggered")
+   
+    def _trig_pad7(self, value):        
+        if value > 0:
+            self.show_message("TFMX Debug: Pad7 triggered")
+            
+    #3rd-row
+    def _trig_pad8(self, value):     
+        if value > 0:
+            self.show_message("TFMX Debug: Pad8 triggered")
+            
+    def _trig_pad9(self, value):        
+        if value > 0:
+            self.show_message("TFMX Debug: Pad9 triggered")    
+        
+    def _trig_pad10(self, value):        
+        if value > 0:
+            self.show_message("TFMX Debug: Pad10 triggered")
+
+    def _trig_pad11(self, value):        
+        if value > 0:
+            self.show_message("TFMX Debug: Pad11 triggered")
+    #Top-row
+    def _trig_pad12(self, value):        
+        if value > 0:
+            self.show_message("TFMX Debug: Pad12 triggered")
+            
+    def _trig_pad13(self, value):        
+        if value > 0:
+            self.show_message("TFMX Debug: Pad13 triggered")
+            
+    def _trig_pad14(self, value):        
+        if value > 0:
+            self.show_message("TFMX Debug: Pad14 triggered")
+
+    def _trig_pad15(self, value):        
+        if value > 0:
+            self.show_message("TFMX Debug: Pad15 triggered")
+    
+    #-- DrumBank B ----------------------------------------------------------
+    def _trig_pad16(self, value):        
+        if value > 0:
+            self.show_message("TFMX Debug: Pad16 triggered")
+    
+            
+    def _trig_pad17(self, value):                
+        if value > 0: 
+            self.show_message("TFMX Debug: Pad17 triggered")
+    
+    def _trig_pad18(self, value):        
+        if value > 0:
+            self.show_message("TFMX Debug: Pad18 triggered")
+                
+   
+    def _trig_pad19(self, value):        
+        if value > 0:
+            self.show_message("TFMX Debug: Pad19 triggered")
+
+    #2nd row
+    def _trig_pad20(self, value):        
+        if value > 0:
+            self.show_message("TFMX Debug: Pad20 triggered")
+ 
+    def _trig_pad21(self, value):        
+        if value > 0:
+            self.show_message("TFMX Debug: Pad21 triggered")
+                  
+    def _trig_pad22(self, value):        
+        if value > 0:            
+            self.show_message("TFMX Debug: Pad22 triggered")
+   
+    def _trig_pad23(self, value):        
+        if value > 0:
+            self.show_message("TFMX Debug: Pad23 triggered")
+            
+    #3rd-row
+    def _trig_pad24(self, value):     
+        if value > 0:
+            self.show_message("TFMX Debug: Pad24 triggered")
+            
+    def _trig_pad25(self, value):        
+        if value > 0:
+            self.show_message("TFMX Debug: Pad25 triggered")    
+        
+    def _trig_pad26(self, value):        
+        if value > 0:
+            self.show_message("TFMX Debug: Pad26 triggered")
+
+    def _trig_pad27(self, value):        
+        if value > 0:
+            self.show_message("TFMX Debug: Pad27 triggered")
+    #Top-row
+    def _trig_pad28(self, value):        
+        if value > 0:
+            self.show_message("TFMX Debug: Pad28 triggered")
+            
+    def _trig_pad29(self, value):        
+        if value > 0:
+            self.show_message("TFMX Debug: Pad29 triggered")
+            
+    def _trig_pad30(self, value):        
+        if value > 0:
+            self.show_message("TFMX Debug: Pad30 triggered")
+
+    def _trig_pad31(self, value):        
+        if value > 0:
+            self.show_message("TFMX Debug: Pad31 triggered")
+            
+    #----------------------------------------------------------------------------------------------------------------------------
     
     #Track changed    
     def _update_selected_device(self):
