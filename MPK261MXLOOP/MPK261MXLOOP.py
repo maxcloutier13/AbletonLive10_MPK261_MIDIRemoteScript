@@ -44,9 +44,11 @@ class MPK261MXLOOP(ControlSurface):
         self.log_message("-----------------------= MPK261MXLOOP LOADING - maxcloutier13 says hi =----------------------------------------------------------")
         with self.component_guard():
             midimap = MidiMap()
-            #Sustain pedal 2 = Play/Record/Overdub switch for live looping
-            self._LoopRecordButton = ButtonElement(True, MIDI_CC_TYPE, 0, 65)
+            #Sustain pedal 1 = Play/Record/Overdub switch for live looping
+            self._LoopRecordButton = ButtonElement(True, MIDI_CC_TYPE, 0, 64)
             self._LoopRecordButton.add_value_listener(self._launch_clip, False)
+            #Sustain pedal 2 = Sustain pour l'instant ;o)
+            #self._LoopRecordButton = ButtonElement(True, MIDI_CC_TYPE, 0, 65)            
             #Control up/down/left/right using the daw controls            
             self._UpButton = ButtonElement(False, MIDI_CC_TYPE, 0, 88, name='UpButton')
             self._DownButton = ButtonElement(False, MIDI_CC_TYPE, 0, 89, name='DownButton')
