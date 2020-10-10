@@ -1,52 +1,40 @@
 # MPK261-MIDI-Remote-Script
 Custom midi remote script for using the MPK261 in Ableton Live 10.x <br/>
-Fixes some issues with the default one that comes with Ableton.
+Fixes some issues with the default one that comes with Ableton.<br/>
+Alternate script with Live-Looping functionality
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-I was trying to resolve 3 problems mainly: <br/>
-1: Actually using the encoder knobs in RELATIVE mode as they were intended. Makes them much smoother to use. <br/>
-2: Automap the 8 knobs to devices instead of being fixed as Pan controls. <br/>
-3: Make the B and C bank usable to cover more than 8 channels
-
-All 3 problems are solved as of 2020-10-04 6:27 PM 
-
 How to Install<br/>
 1: Find the "MIDI Remote Scripts" folder for your installation of Ableton (Usually: C:\Program Files\Ableton\Resources\MIDI Remote Scripts)<br/>
-2: Copy the MPK261MX folder there<br/>
-3: Open Ableton and got to Option/Preferences .. Then the Link MIDI tab. Select MPK261MX in the Control Surface selector. Set Input/Output as your MPK261<br/>
+2: Copy the MPK261MX and MPK261MXLOOP folders there<br/>
+3: Open Ableton and got to Option/Preferences .. Then the Link MIDI tab. Select the desired script in the Control Surface selector. Set Input/Output as your MPK261<br/>
 
 Setting on the MPK261 to support the Relative Encoders<br/>
 1: Load the "LiveLite" default Preset<br/>
 2: Save it on another slot (there are empty ones from 25 to 30), I name mine MPK261MX to keep it simple<br/>
 3: With your new Preset loaded go to edit mode<br/>
-4: Move the first knob and change the "Type" from "MIDI CC" to "INC/DEC2". Do the same for all 8 knobs<br/>
+4: Move the first knob and change the "Type" from "MIDI CC" to "INC/DEC2". Make sure they are on channel 1. Do the same for all 8 knobs<br/>
 5: Save your preset<br/>
 
 You should be good to go!<br/>
 Clicking on a device you should now see the blue hand and it should automap if you click on another device<br/>
 Enjoy the super smooth movement of the relative knobs!<br/>
 
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-v1.0 - 2020-10-04 10:43 AM <br/>
-Limitations:<br/>
-This is my first time messing with midi remote script so bear with me<br/>
-~~Only Bank A of the sliders/arm works right now.<br/>~~
-Sometimes it doesn't get the blue hand on the first device you open, selecting a second one usually makes it work.<br/>
+<b>MPK261MX </b>
+"Normal" script mostly meant to live play insttruments
 
-TODO:<br/>
-~~Fix bank B+C so it controls tracks 9-16 and 16-24 fluidly<br/>~~
-~~Switch device (blue hand) automatically when selecting another channel<br/>~~
--Set up my Preset so it can be dumped directly to the mpk from Ableton (Sysex?)<br/>
+<b>MPK261MXLOOP </b>
+Script to be used for LiveLooping<br/>
+Sustain pedal 1 (CC64) is a smart Launchtrack button<br/>
+-- On empty cell: record<br/>
+-- While recording: Stop and play clip<br/>
+-- On a playing clip: toggle overdub mode on/off<br/>
+-- On an empty clip while another clip is playing: Stop clips and start recording<br/>
 
-v1.1 fixed the autoswitch device when selecting another channel  
-
-v1.2 - 2020-10-04 6:27 PM  
--Bank B and C entirely functionnal with the arm buttons and sliders activating channels 9-15 and 16-24 as would be expected  
-
-v1.3 - 2020-10-05 10:23 PM 
--Removed Back/Fwd from Transport to be used as relative Prev/Next in VST instruments
--Encoders on channel 1 automap to device. Channel 2-3-4 control the pan and follows the bank selection on all 24 tracks
--Meant to be used with a "play" preset with all knobs set to 1 ... and a "mixer" preset with 2-3-4 for 24 track panning
+Daw Control arrows<br/>
+Change your MPK preset so that the arrows send CC instead of keystrokes<br/>
+Channel 1<br/>
+UP:88 Down:89 Left:20 Right:21<br/>
+Those are automapped to track selection Left/Right and clip selection up/down regardless of current focus
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- KUDOS --<br/>
