@@ -282,37 +282,52 @@ class MPK261MXLOOP(ControlSurface):
     #-- DrumBank A ----------------------------------------------------------
     def _trig_pad0(self, value):        
         if value > 0:
+            #Track 1 Stop
+            self.song().tracks[0].stop_all_clips()
             self.show_message("TFMX Debug: Pad0 triggered")
-    
             
     def _trig_pad1(self, value):                
         if value > 0: 
+            #Track 2 Stop
+            self.song().tracks[1].stop_all_clips()
             self.show_message("TFMX Debug: Pad1 triggered")
     
     def _trig_pad2(self, value):        
         if value > 0:
+            #Track 3 Stop
+            self.song().tracks[2].stop_all_clips()
             self.show_message("TFMX Debug: Pad2 triggered")
                 
    
     def _trig_pad3(self, value):        
         if value > 0:
+            #Track 4 Stop
+            self.song().tracks[3].stop_all_clips()
             self.show_message("TFMX Debug: Pad3 triggered")
 
     #2nd row
     def _trig_pad4(self, value):        
         if value > 0:
+            #Track 0 Cell 3: Fire
+            self.song().tracks[0].clip_slots[2].set_fire_button_state(True)
             self.show_message("TFMX Debug: Pad4 triggered")
  
     def _trig_pad5(self, value):        
         if value > 0:
+            #Track 1 Cell 3: Fire
+            self.song().tracks[1].clip_slots[2].set_fire_button_state(True)
             self.show_message("TFMX Debug: Pad5 triggered")
                   
     def _trig_pad6(self, value):        
-        if value > 0:            
+        if value > 0:
+            #Track 2 Cell 3: Fire
+            self.song().tracks[2].clip_slots[2].set_fire_button_state(True)
             self.show_message("TFMX Debug: Pad6 triggered")
    
     def _trig_pad7(self, value):        
         if value > 0:
+            #Track 3 Cell 3: Fire
+            self.song().tracks[3].clip_slots[2].set_fire_button_state(True)
             self.show_message("TFMX Debug: Pad7 triggered")
             
     #3rd-row
