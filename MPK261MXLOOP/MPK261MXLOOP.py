@@ -20,6 +20,8 @@ from _Framework.MidiMap import make_button, make_encoder, make_slider
 from _Framework.InputControlElement import MIDI_NOTE_TYPE, MIDI_CC_TYPE
 
 _overdub_flag = 0
+_color = [0,0,0]
+_last_color = []
 
 #Custom make_encoder function to use RELATIVE knobs instead of the default absolute
 def make_encoder(name, channel, number, midi_message_type):
@@ -223,10 +225,11 @@ class MPK261MXLOOP(ControlSurface):
             self._Pad30.add_value_listener(self._trig_pad30, False)
             self._Pad31.add_value_listener(self._trig_pad31, False)
             
-            self._Pads0 = ButtonMatrixElement(rows=[[self._Pad0, self._Pad1, self._Pad2, self._Pad3],
-                                                   [self._Pad4, self._Pad5, self._Pad6, self._Pad7], 
-                                                   [self._Pad8, self._Pad9, self._Pad10, self._Pad11],
-                                                   [self._Pad12, self._Pad13, self._Pad14, self._Pad15]])
+            self._Pads1 = ButtonMatrixElement(rows=[[self._Pad16, self._Pad17, self._Pad18, self._Pad19],
+                                                   [self._Pad20, self._Pad21, self._Pad22, self._Pad23], 
+                                                   [self._Pad24, self._Pad25, self._Pad26, self._Pad27],
+                                                   [self._Pad28, self._Pad29, self._Pad30, self._Pad31]])
+            self._AllPads = [self._Pads0, self._Pads1]
             #Drum Bank C -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             #Drum Bank D -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             #
@@ -282,154 +285,218 @@ class MPK261MXLOOP(ControlSurface):
     #-- DrumBank A ----------------------------------------------------------
     def _trig_pad0(self, value):        
         if value > 0:
-            #Track 1 Stop
+            #Track 0 Stop
             self.song().tracks[0].stop_all_clips()
             self.show_message("TFMX Debug: Pad0 triggered")
             
     def _trig_pad1(self, value):                
         if value > 0: 
-            #Track 2 Stop
+            #Track 1 Stop
             self.song().tracks[1].stop_all_clips()
             self.show_message("TFMX Debug: Pad1 triggered")
     
     def _trig_pad2(self, value):        
         if value > 0:
-            #Track 3 Stop
+            #Track 2 Stop
             self.song().tracks[2].stop_all_clips()
             self.show_message("TFMX Debug: Pad2 triggered")
                 
    
     def _trig_pad3(self, value):        
         if value > 0:
-            #Track 4 Stop
+            #Track 3 Stop
             self.song().tracks[3].stop_all_clips()
             self.show_message("TFMX Debug: Pad3 triggered")
 
     #2nd row
     def _trig_pad4(self, value):        
         if value > 0:
-            #Track 0 Cell 3: Fire
+            #Track 0 Cell 2: Fire
             self.song().tracks[0].clip_slots[2].set_fire_button_state(True)
             self.show_message("TFMX Debug: Pad4 triggered")
  
     def _trig_pad5(self, value):        
         if value > 0:
-            #Track 1 Cell 3: Fire
+            #Track 1 Cell 2: Fire
             self.song().tracks[1].clip_slots[2].set_fire_button_state(True)
             self.show_message("TFMX Debug: Pad5 triggered")
                   
     def _trig_pad6(self, value):        
         if value > 0:
-            #Track 2 Cell 3: Fire
+            #Track 2 Cell 2: Fire
             self.song().tracks[2].clip_slots[2].set_fire_button_state(True)
             self.show_message("TFMX Debug: Pad6 triggered")
    
     def _trig_pad7(self, value):        
         if value > 0:
-            #Track 3 Cell 3: Fire
+            #Track 3 Cell 2: Fire
             self.song().tracks[3].clip_slots[2].set_fire_button_state(True)
             self.show_message("TFMX Debug: Pad7 triggered")
             
     #3rd-row
     def _trig_pad8(self, value):     
         if value > 0:
+            #Track 0 Cell 1: Fire
+            self.song().tracks[0].clip_slots[1].set_fire_button_state(True)
             self.show_message("TFMX Debug: Pad8 triggered")
             
     def _trig_pad9(self, value):        
         if value > 0:
+            #Track 1 Cell 1: Fire
+            self.song().tracks[1].clip_slots[1].set_fire_button_state(True)
             self.show_message("TFMX Debug: Pad9 triggered")    
         
     def _trig_pad10(self, value):        
         if value > 0:
+            #Track 2 Cell 1: Fire
+            self.song().tracks[2].clip_slots[1].set_fire_button_state(True)
             self.show_message("TFMX Debug: Pad10 triggered")
 
     def _trig_pad11(self, value):        
         if value > 0:
+            #Track 3 Cell 1: Fire
+            self.song().tracks[3].clip_slots[1].set_fire_button_state(True)
             self.show_message("TFMX Debug: Pad11 triggered")
     #Top-row
     def _trig_pad12(self, value):        
         if value > 0:
-            self.show_message("TFMX Debug: Pad12 triggered")
+            #Track 0 Cell 0: Fire            
+            slot = self.song().tracks[0].clip_slots[0]
+            slot.set_fire_button_state(True)
+            self.show_message("TFMX Debug: Pad11 triggered")
+            self.log_message("TFMX Debug: Setting clip color")
+            #slot.color = 30
+            #clip = slot.clip
+            #clip.color = 30
+    
+    #Lights up a pad
+    #def _light_pad(self, pads_index, pad_index):
+     #   global _last_color
+        #Shut all lights in track. Light up the triggered one
+        #for slot in self.song().view.selected_track.clip_slots:
+            #if slot.has_clip == 1:
+                #Need to default to original color, shit.
+                #slot.clip.color =  
+     #   if self.song().view.highlighted_clip_slot.has_clip == 0:
+     #       self._AllPads[pads_index]._Pads0[pad_index].color = (26,255,47)
             
     def _trig_pad13(self, value):        
         if value > 0:
+            #Track 1 Cell 0: Fire
+            self.song().tracks[1].clip_slots[0].set_fire_button_state(True)
             self.show_message("TFMX Debug: Pad13 triggered")
             
     def _trig_pad14(self, value):        
         if value > 0:
+            #Track 2 Cell 0: Fire
+            self.song().tracks[2].clip_slots[0].set_fire_button_state(True)
             self.show_message("TFMX Debug: Pad14 triggered")
 
     def _trig_pad15(self, value):        
         if value > 0:
+            #Track 3 Cell 0: Fire
+            self.song().tracks[3].clip_slots[0].set_fire_button_state(True)
             self.show_message("TFMX Debug: Pad15 triggered")
     
     #-- DrumBank B ----------------------------------------------------------
     def _trig_pad16(self, value):        
         if value > 0:
+            #Track 4 Stop
+            self.song().tracks[4].stop_all_clips()
             self.show_message("TFMX Debug: Pad16 triggered")
     
-            
     def _trig_pad17(self, value):                
-        if value > 0: 
+        if value > 0:
+            #Track 5 Stop
+            self.song().tracks[5].stop_all_clips()
             self.show_message("TFMX Debug: Pad17 triggered")
     
     def _trig_pad18(self, value):        
         if value > 0:
+            #Track 6 Stop
+            self.song().tracks[6].stop_all_clips()
             self.show_message("TFMX Debug: Pad18 triggered")
                 
    
     def _trig_pad19(self, value):        
         if value > 0:
+            #Track 7 Stop
+            self.song().tracks[7].stop_all_clips()
             self.show_message("TFMX Debug: Pad19 triggered")
 
     #2nd row
     def _trig_pad20(self, value):        
         if value > 0:
+            #Track 4 Cell 2: Fire
+            self.song().tracks[4].clip_slots[2].set_fire_button_state(True)
             self.show_message("TFMX Debug: Pad20 triggered")
  
     def _trig_pad21(self, value):        
         if value > 0:
+            #Track 5 Cell 2: Fire
+            self.song().tracks[5].clip_slots[2].set_fire_button_state(True)
             self.show_message("TFMX Debug: Pad21 triggered")
                   
     def _trig_pad22(self, value):        
-        if value > 0:            
+        if value > 0: 
+            #Track 6 Cell 2: Fire
+            self.song().tracks[6].clip_slots[2].set_fire_button_state(True)
             self.show_message("TFMX Debug: Pad22 triggered")
    
     def _trig_pad23(self, value):        
         if value > 0:
+            #Track 7 Cell 2: Fire
+            self.song().tracks[7].clip_slots[2].set_fire_button_state(True)
             self.show_message("TFMX Debug: Pad23 triggered")
             
     #3rd-row
     def _trig_pad24(self, value):     
         if value > 0:
+            #Track 4 Cell 1: Fire
+            self.song().tracks[4].clip_slots[1].set_fire_button_state(True)
             self.show_message("TFMX Debug: Pad24 triggered")
             
     def _trig_pad25(self, value):        
         if value > 0:
+            #Track 5 Cell 1: Fire
+            self.song().tracks[5].clip_slots[1].set_fire_button_state(True)
             self.show_message("TFMX Debug: Pad25 triggered")    
         
     def _trig_pad26(self, value):        
         if value > 0:
+            #Track 6 Cell 1: Fire
+            self.song().tracks[6].clip_slots[1].set_fire_button_state(True)
             self.show_message("TFMX Debug: Pad26 triggered")
 
     def _trig_pad27(self, value):        
         if value > 0:
+            #Track 7 Cell 1: Fire
+            self.song().tracks[7].clip_slots[1].set_fire_button_state(True)
             self.show_message("TFMX Debug: Pad27 triggered")
+            
     #Top-row
     def _trig_pad28(self, value):        
         if value > 0:
+            #Track 4 Cell 0: Fire
+            self.song().tracks[4].clip_slots[0].set_fire_button_state(True)
             self.show_message("TFMX Debug: Pad28 triggered")
             
     def _trig_pad29(self, value):        
         if value > 0:
+            #Track 5 Cell 0: Fire
+            self.song().tracks[5].clip_slots[0].set_fire_button_state(True)
             self.show_message("TFMX Debug: Pad29 triggered")
             
     def _trig_pad30(self, value):        
         if value > 0:
+            #Track 6 Cell 0: Fire
+            self.song().tracks[6].clip_slots[0].set_fire_button_state(True)
             self.show_message("TFMX Debug: Pad30 triggered")
 
     def _trig_pad31(self, value):        
         if value > 0:
+            #Track 7 Cell 0: Fire
+            self.song().tracks[7].clip_slots[0].set_fire_button_state(True)
             self.show_message("TFMX Debug: Pad31 triggered")
             
     #----------------------------------------------------------------------------------------------------------------------------
