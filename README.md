@@ -39,9 +39,13 @@ Those are automapped to track selection Left/Right and clip selection up/down re
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- KUDOS --<br/>
 Gluon (Julien Bayle) for the unofficial repository: https://github.com/gluon/AbletonLive10.1_MIDIRemoteScripts<br/>
-and API documentation: https://julienbayle.studio/AbletonLiveRemoteScripts_Docs/_Framework/_Framework-module.html<br/>
+and API documentation: https://julienbayle.studio/AbletonLiveRemoteScripts_Docs/_Framework/<br/>
+Some more: https://julienbayle.studio/PythonLiveAPI_documentation/Live10.0.1.xml<br/>
 mLegore (Michael LeGore) for his MPK249 automap fix: https://gist.github.com/mlegore/477741b6b6a2c8f658d81d2c02de0974<br/>
 Richard Medek for his Endless encoders fix: https://richardmedek.com/2016/01/13/ableton-live-and-akais-endless-encoders/<br/>
+Framework scripts for reference: https://github.com/gluon/AbletonLive10.1_MIDIRemoteScripts/tree/master/_Framework<br/>
+Hot Examples. Good for finding code snippets for people who don't know python like me: https://python.hotexamples.com/examples/_Framework.TransportComponent/TransportComponent/set_enabled/python-transportcomponent-set_enabled-method-examples.html<br/>
+Live Object Model from MaxForLive: https://docs.cycling74.com/max8/vignettes/live_object_model?q=object%20model<br/>
 Ableton for making this possible at all<br/>
 NOT Ableton for making this information so freaking hard to find and figure out<br/>
 NOT Akai for putting out a half-assed default script. The super old MPK61 script didn't have the same limitations. So weird.<br/>
